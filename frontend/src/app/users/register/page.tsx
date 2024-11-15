@@ -1,10 +1,49 @@
 "use client"
-
+import { useState } from "react"
+import {api_url} from "../../url"
+import axios from "axios";
 
 export default function register() {
+    const [email,setEmail] = useState("");
+    const [password1,setPassword1] = useState("");
+    const [password2,setPassword2] = useState("");
 
+
+    const handesubmit = async (e:any) =>{
+        e.preventDefault();
+        if (password1 !== password2) {
+            // setMessage("Passwords do not match.");
+            return;
+          }
+      
+          // Prepare data for API
+          const data = {
+            username: email,
+            password:password1,
+            password2,
+          };
+          try {
+            const response = await axios.post(`${api_url}/users/create_user/`, data, {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            });
+      
+            if (response.status === 201) {
+            //   setMessage("User registered successfully!");
+              console.log("Tokens:", response.data); // Access/Refresh tokens
+            }
+          } catch (err) {
+            // Handle error messages from the server
+            if (err.response && err.response.data) {
+            //   setMessage(err.response.data?.email_or_mobile || err.response.data?.password || "Registration failed.");
+            } else {
+            //   setMessage("An error occurred. Please try again.");
+            }
+          }
+    }
     return (
-        <div data-mode="dark">
+        <div >
             <div className="flex items-center justify-center min-h-screen py-16 lg:py-10 bg-slate-50 dark:bg-zink-800 dark:text-zink-100 font-public">
                 <div className="relative">
                     <div className="absolute hidden opacity-50 ltr:-left-16 rtl:-right-16 -top-10 md:block">
@@ -47,38 +86,36 @@ export default function register() {
                         </svg>
                     </div>
 
-                    <div className="mb-0 w-screen lg:w-[500px] card shadow-lg border-none shadow-slate-100 relative">
+                    <div dir="rtl" className="mb-0 w-screen lg:w-[500px] card shadow-lg border-none shadow-slate-100 relative">
                         <div className="!px-10 !py-12 card-body">
   
 
                                     <div className="mt-8 text-center">
-                                        <h4 className="mb-1 text-custom-500 dark:text-custom-500">Create your free account</h4>
-                                        <p className="text-slate-500 dark:text-zink-200">Get your free Tailwick account now</p>
+                                        <h4 className="mb-1 text-custom-500 dark:text-custom-500">اکانت خود را بسازید</h4>
                                     </div>
 
-                                    <form action="#!" className="mt-10" id="registerForm">
+                                    <form onSubmit={handesubmit} className="mt-10" id="registerForm">
                                         <div className="mb-3">
-                                            <label  className="inline-block mb-2 text-base font-medium">Email</label>
-                                            <input type="text" id="email-field" className="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="Enter email" />
-                                                <div id="email-error" className="hidden mt-1 text-sm text-red-500">Please enter a valid email address.</div>
+                                            <label  className="inline-block mb-2 text-base font-medium">ایمیل</label>
+                                            <input value={email} onChange={e => setEmail(e.target.value)} type="text" id="email-field" className="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="ایمیل را وارد کنید" />
+                                                <div id="email-error" className="hidden mt-1 text-sm text-red-500">ایمیل خود را وارد کنید.</div>
                                         </div>
                                         <div className="mb-3">
-                                            <label  className="inline-block mb-2 text-base font-medium">UserName</label>
-                                            <input type="text" id="username-field" className="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="Enter username" />
-                                                <div id="username-error" className="hidden mt-1 text-sm text-red-500">Please enter a username.</div>
+                                            <label  className="inline-block mb-2 text-base font-medium">پسورد</label>
+                                            <input value={password1} onChange={e => setPassword1(e.target.value)} type="password" id="password-field" className="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="پسورد را وارد کنید" />
+                                                <div id="username-error" className="hidden mt-1 text-sm text-red-500">پسورد باید ۸ کارکتر و شامل اعداد و حروف باشد.</div>
                                         </div>
                                         <div className="mb-3">
-                                            <label  className="inline-block mb-2 text-base font-medium">Password</label>
-                                            <input type="password" id="password" className="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="Enter password" />
-                                                <div id="password-error" className="hidden mt-1 text-sm text-red-500">Password must be at least 8 characters long and contain both letters and numbers.</div>
+                                            <label  className="inline-block mb-2 text-base font-medium">تکرار پسورد</label>
+                                            <input value={password2} onChange={e => setPassword2(e.target.value)} type="password" id="password" className="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="پسورد را تکرار کنید" />
+                                                <div id="password-error" className="hidden mt-1 text-sm text-red-500">پسورد باید ۸ کارکتر و شامل اعداد و حروف باشد.</div>
                                         </div>
-                                        <p className="italic text-15 text-slate-500 dark:text-zink-200">By registering you agree to the Tailwick <a href="#!" className="underline">Terms of Use</a></p>
                                         <div className="mt-10">
-                                            <button type="submit" className="w-full text-white transition-all duration-200 ease-linear btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">Sign In</button>
+                                            <button type="submit" className="w-full text-white transition-all duration-200 ease-linear btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">ثبتنام</button>
                                         </div>
 
                                         <div className="relative text-center my-9 before:absolute before:top-3 before:left-0 before:right-0 before:border-t before:border-t-slate-200 dark:before:border-t-zink-500">
-                                            <h5 className="inline-block px-2 py-0.5 text-sm bg-white text-slate-500 dark:bg-zink-600 dark:text-zink-200 rounded relative">Create account with</h5>
+                                            <h5 className="inline-block px-2 py-0.5 text-sm bg-white text-slate-500 dark:bg-zink-600 dark:text-zink-200 rounded relative">ثبتنام با</h5>
                                         </div>
 
                                         <div className="flex flex-wrap justify-center gap-2">
