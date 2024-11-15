@@ -6,7 +6,7 @@ export default function register() {
 
 
     return (
-            <div className="flex items-center justify-center min-h-screen py-16 lg:py-10 bg-slate-50 dark:bg-zink-800 dark:text-zink-100 font-public">
+            <div data-mode="dark" className="flex items-center justify-center min-h-screen py-16 lg:py-10 dark:bg-zink-800 dark:text-zink-100 font-public">
         <div className="relative">
             <div className="absolute hidden opacity-50 ltr:-left-16 rtl:-right-16 -top-10 md:block">
                 <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 125 316" width="125" height="316">
@@ -48,8 +48,8 @@ export default function register() {
                 </svg>
             </div>
 
-            <div className="mb-0 w-screen lg:mx-auto lg:w-[500px] card shadow-lg border-none shadow-slate-100 relative">
-                <div className="!px-10 !py-12 card-body">
+            <div   data-mode="dark" className="mb-0 w-screen lg:mx-auto lg:w-[500px] card shadow-lg border-none shadow-slate-100 relative">
+                <div   data-mode="dark" className="!px-10 !py-12 card-body">
 
 
                     <div className="mt-8 text-center">
