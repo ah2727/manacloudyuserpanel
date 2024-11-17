@@ -44,7 +44,6 @@ export default function register() {
                 console.log("Tokens:", response.data); // Access/Refresh tokens
                 const { access, refresh } = response.data;
                 saveTokensToCookies(access, refresh);
-
                 router.push('/users/dashboard');
 
             }
