@@ -3,7 +3,7 @@ import { useState } from "react"
 import { api_url } from "../../url"
 import axios from "axios";
 import Cookies from 'js-cookie'; // Install this with: npm install js-cookie
-
+import { useRouter } from "next/navigation";
 
 export const saveTokensToCookies = (accessToken, refreshToken) => {
     // Set cookies with secure flags
@@ -13,6 +13,7 @@ export const saveTokensToCookies = (accessToken, refreshToken) => {
     console.log('Tokens saved to cookies!');
   };
 export default function register() {
+    const router = useRouter();
     const [email, setEmail] = useState("");
     const [password1, setPassword1] = useState("");
     const [password2, setPassword2] = useState("");
@@ -37,11 +38,15 @@ export default function register() {
                     "Content-Type": "application/json",
                 },
             });
-            const { access, refresh } = response.data;
-            saveTokensToCookies(access, refresh);
+        
             if (response.status === 201) {
                 //   setMessage("User registered successfully!");
                 console.log("Tokens:", response.data); // Access/Refresh tokens
+                const { access, refresh } = response.data;
+                saveTokensToCookies(access, refresh);
+
+                router.push('/users/dashboard');
+
             }
         } catch (err) {
             // Handle error messages from the server
