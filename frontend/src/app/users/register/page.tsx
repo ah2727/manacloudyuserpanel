@@ -2,7 +2,16 @@
 import { useState } from "react"
 import { api_url } from "../../url"
 import axios from "axios";
+import Cookies from 'js-cookie'; // Install this with: npm install js-cookie
 
+
+export const saveTokensToCookies = (accessToken, refreshToken) => {
+    // Set cookies with secure flags
+    Cookies.set('accessToken', accessToken, { path: '/', secure: true, sameSite: 'Strict' });
+    Cookies.set('refreshToken', refreshToken, { path: '/', secure: true, sameSite: 'Strict' });
+  
+    console.log('Tokens saved to cookies!');
+  };
 export default function register() {
     const [email, setEmail] = useState("");
     const [password1, setPassword1] = useState("");
@@ -28,7 +37,8 @@ export default function register() {
                     "Content-Type": "application/json",
                 },
             });
-
+            const { access, refresh } = response.data;
+            saveTokensToCookies(access, refresh);
             if (response.status === 201) {
                 //   setMessage("User registered successfully!");
                 console.log("Tokens:", response.data); // Access/Refresh tokens

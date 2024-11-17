@@ -1,9 +1,10 @@
 "use client"
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import BasicButton from '../../component/button/basicbutton.tsx';
 import ColorButton from '@/app/component/button/colorbutton.tsx';
 export default function login() {
-
+    const [email,setEmail] = useState("");
+    const [password,setPassword] = useState("");
 
     return (
         <div >
@@ -49,42 +50,40 @@ export default function login() {
                 </svg>
             </div>
 
-            <div    className="mb-0 w-screen lg:mx-auto lg:w-[500px] card shadow-lg border-none shadow-slate-100 relative">
+            <div dir="rtl"   className="mb-0 w-screen lg:mx-auto lg:w-[500px] card shadow-lg border-none shadow-slate-100 relative">
                 <div    className="!px-10 !py-12 card-body">
 
 
                     <div className="mt-8 text-center">
-                        <h4 className="mb-1 text-custom-500 dark:text-custom-500">Welcome Back !</h4>
-                        <p className="text-slate-500 dark:text-zink-200">Sign in to continue to Tailwick.</p>
+                        <h4 className="mb-1 text-custom-500 dark:text-custom-500">خوش امدید !</h4>
                     </div>
 
                     <form action="index.html" className="mt-10" id="signInForm">
                         <div className="hidden px-4 py-3 mb-3 text-sm text-green-500 border border-green-200 rounded-md bg-green-50 dark:bg-green-400/20 dark:border-green-500/50" id="successAlert">
-                            You have <b>successfully</b> signed in.
+                            شما با <b>موفقیت</b> وارد شدید.
                         </div>
                         <div className="mb-3">
-                            <label className="inline-block mb-2 text-base font-medium">UserName/ Email ID</label>
-                            <input type="text" id="username" className="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="Enter username or email" />
-                            <div id="username-error" className="hidden mt-1 text-sm text-red-500">Please enter a valid email address.</div>
+                            <label className="inline-block mb-2 text-base font-medium">ایمیل خود را وارد کنید</label>
+                            <input type="text" id="username" className="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="ایمیل خود را وارد کنید" />
+                            <div id="username-error" className="hidden mt-1 text-sm text-red-500">لطفا ایمیل خود را به درستی وارد کنید.</div>
                         </div>
                         <div className="mb-3">
-                            <label className="inline-block mb-2 text-base font-medium">Password</label>
-                            <input type="password" id="password" className="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="Enter password" />
-                            <div id="password-error" className="hidden mt-1 text-sm text-red-500">Password must be at least 8 characters long and contain both letters and numbers.</div>
+                            <label className="inline-block mb-2 text-base font-medium">پسورد</label>
+                            <input type="password" id="password" className="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="پسورد خود را وارد کنید" />
+                            <div id="password-error" className="hidden mt-1 text-sm text-red-500">پسورد خود را به درستی وارد کنید.</div>
                         </div>
                         <div>
                             <div className="flex items-center gap-2">
                                 <input id="checkboxDefault1" className="border rounded-sm appearance-none size-4 bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-custom-500 checked:border-custom-500 dark:checked:bg-custom-500 dark:checked:border-custom-500 checked:disabled:bg-custom-400 checked:disabled:border-custom-400" type="checkbox" value="" />
-                                <label className="inline-block text-base font-medium align-middle cursor-pointer">Remember me</label>
+                                <label className="inline-block text-base font-medium align-middle cursor-pointer">مرا به خاطر بسپار</label>
                             </div>
-                            <div id="remember-error" className="hidden mt-1 text-sm text-red-500">Please check the "Remember me" before submitting the form.</div>
                         </div>
                         <div className="mt-10">
-                            <button type="submit" className="w-full text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">Sign In</button>
+                            <button type="submit" className="w-full text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">ورود</button>
                         </div>
 
                         <div className="relative text-center my-9 before:absolute before:top-3 before:left-0 before:right-0 before:border-t before:border-t-slate-200 dark:before:border-t-zink-500">
-                            <h5 className="inline-block px-2 py-0.5 text-sm bg-white text-slate-500 dark:bg-zink-600 dark:text-zink-200 rounded relative">Sign In with</h5>
+                            <h5 className="inline-block px-2 py-0.5 text-sm bg-white text-slate-500 dark:bg-zink-600 dark:text-zink-200 rounded relative">ورود با</h5>
                         </div>
 
                         <div className="flex flex-wrap justify-center gap-2">

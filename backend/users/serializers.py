@@ -4,12 +4,12 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework.validators import UniqueValidator
 import re
 
+
 class RegisterSerializer(serializers.ModelSerializer):
-    # Additional fields for validation
     username = serializers.CharField(
         required=True,
         validators=[
-            UniqueValidator(queryset=CustomUser.objects.all(), message="This email or mobile is already registered.")
+            UniqueValidator(queryset=CustomUser.objects.all(), message="This email or mobile number is already registered.")
         ]
     )
     password = serializers.CharField(
@@ -28,11 +28,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = ['username', 'password', 'password2']
 
-    def validate_email_or_mobile(self, value):
+    def validate_username(self, value):
         """
         Check if the input is a valid email or mobile number.
         """
-        email_regex = r'^\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+        email_regex = r'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$'
         mobile_regex = r'^\+?\d{10,15}$'
 
         if re.match(email_regex, value):
@@ -61,17 +61,18 @@ class RegisterSerializer(serializers.ModelSerializer):
 
         # Check if the input is an email or mobile number
         if hasattr(self, 'is_email') and self.is_email:
-            # Use email as username
+            # Use email
             user = CustomUser.objects.create_user(
                 username=username,
                 email=username,
                 password=password
             )
         else:
-            # Use mobile number as username
+            # Use mobile number
             user = CustomUser.objects.create_user(
                 username=username,
+                phonenumber=username,
                 password=password
             )
-        
+
         return user
