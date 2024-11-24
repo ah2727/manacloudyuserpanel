@@ -3,5 +3,7 @@
 
 export default function domain(){
 
-    return(<div></div>)
+    return(
+<div className="flex justify-center">s</div>
+    )
 }
