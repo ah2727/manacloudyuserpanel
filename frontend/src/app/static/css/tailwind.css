@@ -8145,14 +8145,14 @@ h6 {
 
 [type=checkbox]:checked {
     background-repeat: no-repeat;
-    background-image: url(../images/check-arrow.svg);
+    background-image: url(/static/images/check-arrow.svg);
     background-size: .9rem .9rem;
     background-position: 50%
 }
 
 [type=radio]:checked {
     background-repeat: no-repeat;
-    background-image: url(../images/radio-arrow.svg);
+    background-image: url(/static/images/radio-arrow.svg);
     background-size: .75rem .75rem;
     background-position: 58%
 }

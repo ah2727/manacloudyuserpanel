@@ -285,6 +285,5 @@ plugins: [
   require('./src/app/static/plugins/prismjs.js'),
   require('./src/app/static/plugins/vanilla-calendar.js'),
   //apps pages
-  require('./src/app/static/plugins/apps.js'),
 ],
 } satisfies Config;
