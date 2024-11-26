@@ -4,12 +4,13 @@ type ButtonProps = {
   variant: "custom" | "soft" | "dashed" | "outline" | "ghost"; // Define the allowed variants
   children: React.ReactNode; // Button content
   onClick?: () => void; // Optional click handler
+  className:string;
 };
 
-const BasicButton: React.FC<ButtonProps> = ({ variant, children, onClick }) => {
+const BasicButton: React.FC<ButtonProps> = ({ variant, className,children, onClick }) => {
   // Base styles shared by all buttons
   const baseClass =
-    "h-5 btn px-4 py-2 text-sm font-medium focus:ring focus:outline-none rounded";
+    "h-[40px] btn px-4 py-2 text-sm font-medium focus:ring focus:outline-none rounded";
 
   // Define styles for each variant
   const variants = {
@@ -29,7 +30,7 @@ const BasicButton: React.FC<ButtonProps> = ({ variant, children, onClick }) => {
     <button
       type="button"
       onClick={onClick}
-      className={`${baseClass} ${variants[variant]}`}
+      className={`${baseClass} ${className} ${variants[variant]}`}
     >
       {children}
     </button>
