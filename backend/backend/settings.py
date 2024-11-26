@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',  # Optional for token blacklist/refresh
     'corsheaders',  # Optional for CORS
     'users',
+    'domain',
 ]
 
 MIDDLEWARE = [
@@ -149,3 +150,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+API_WHMCS_URL="https://my.manacloudy.com/api/includes/api.php"
+WHMCS_USERNAME = "dx"
+WHMCS_PASSWORD = "c74b58c3ae69df16289df5b99e4b2a44"

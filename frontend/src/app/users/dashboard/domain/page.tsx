@@ -1,4 +1,4 @@
-
+"use client"
 import BasicButton from "@/app/component/basicbutton"
 import { useEffect, useState } from "react"
 import axios from "axios";
