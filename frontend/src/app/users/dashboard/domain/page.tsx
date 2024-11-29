@@ -2,16 +2,39 @@
 import BasicButton from "@/app/component/basicbutton"
 import { useEffect, useState } from "react"
 import axios from "axios";
+import { api_url } from "@/app/url";
 export default function domain() {
-const [Q,SetQ] = useState("");
-    const submitsearch = async() =>{
+    const [Q, SetQ] = useState("");
+    const submitsearch = async (event) => {
+        event.preventDefault(); // Prevent default browser behavior
 
-    }
+        try {
+            const formData = new FormData();
+            formData.append("domain", Q); // Replace Q with the actual domain value
+
+            const response = await axios.post(`${api_url}/domain/domainavilabity/`, formData, {
+                timeout: 10000, // Set timeout to 10 seconds
+            });
+
+            console.log("Response:", response.data); // Log or handle the response
+        } catch (error) {
+            if (error.response) {
+                // Server responded with a status code out of 2xx range
+                console.error("Error Response:", error.response.data);
+            } else if (error.request) {
+                // Request was sent but no response received
+                console.error("No Response:", error.request);
+            } else {
+                // Something went wrong setting up the request
+                console.error("Error:", error.message);
+            }
+        }
+    };
     return (
         <div className="flex items-center flex-col justify-center pt-[10%]">
             <div className="flex gap-4">
-            <BasicButton  className="mb-4" variant="dashed">مشاهده دامنه ها</BasicButton>
-            <BasicButton  className="mb-4" variant="dashed">انتقال دامنه</BasicButton>
+                <BasicButton className="mb-4" variant="dashed">مشاهده دامنه ها</BasicButton>
+                <BasicButton className="mb-4" variant="dashed">انتقال دامنه</BasicButton>
 
             </div>
             <div className="card w-[400px]">
