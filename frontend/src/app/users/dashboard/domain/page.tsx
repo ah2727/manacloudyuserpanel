@@ -56,7 +56,7 @@ export default function domain() {
                 <div className="card-body flex justify-center ">
                     {loading && <div className="loading-indicator"></div>} {/* Show loading indicator */}
                     {domains &&  domains.length > 0 ? (
-                    <table dir="rtl" className="table-auto">
+                    <table dir="ltr" className="table-auto">
                         <thead>
                             <tr>
                                 <th>دامنه</th>
